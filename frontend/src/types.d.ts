@@ -34,3 +34,14 @@ export interface RegisterResponse {
 export interface GlobalError {
   error: string;
 }
+
+export interface PostsTypes {
+  _id: string;
+  user: {
+    username: string;
+  };
+  title: string;
+  description: string;
+  image: string | null;
+  datetime: string;
+}

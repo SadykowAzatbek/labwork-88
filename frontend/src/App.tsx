@@ -3,6 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 import AppToolbar from './components/UI/AppToolbar.tsx';
 import Login from './features/Users/Login.tsx';
 import Register from './features/Users/Register.tsx';
+import Posts from './features/Posts/Posts.tsx';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <AppToolbar />
       </header>
       <Routes>
+        <Route path="/" element={<Posts />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
