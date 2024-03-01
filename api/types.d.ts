@@ -12,3 +12,10 @@ interface UserMethods {
 }
 
 type UserModel = Model<UserTypes, {}, UserMethods>;
+
+export interface PostTypes {
+  title: string;
+  description: string;
+  image: string | null;
+
+}
