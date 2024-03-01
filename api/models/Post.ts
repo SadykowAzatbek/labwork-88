@@ -8,9 +8,9 @@ const PostSchema = new Schema({
     required: true,
     validate: {
       validator: async (value: Types.ObjectId) => {
-        const album = await User.findById(value);
+        const user = await User.findById(value);
 
-        return Boolean(album);
+        return Boolean(user);
       },
       message: 'User not found!',
     },
