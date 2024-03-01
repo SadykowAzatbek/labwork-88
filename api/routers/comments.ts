@@ -8,7 +8,7 @@ commentsRouter.get('/', async (req, res, next) => {
   try {
     const postIdParam = req.query.post as string;
 
-    const result = await Comment.find({post: postIdParam});
+    const result = await Comment.find({post: postIdParam}).populate('user', 'username');
 
     return res.send(result);
   } catch (err) {

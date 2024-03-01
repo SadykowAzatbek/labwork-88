@@ -5,6 +5,7 @@ import Login from './features/Users/Login.tsx';
 import Register from './features/Users/Register.tsx';
 import Posts from './features/Posts/Posts.tsx';
 import PostsForm from './features/Posts/PostsForm.tsx';
+import Comments from './features/Commnets/Comments.tsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/new" element={<PostsForm />} />
+        <Route path="/post/:id" element={<Comments />} />
       </Routes>
     </>
   )

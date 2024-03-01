@@ -13,7 +13,7 @@ const run = async () => {
   await mongoose.connect(config.mongoose.db);
   const db = mongoose.connection;
 
- const collections = ['posts'];
+ const collections = ['posts', 'users', 'comments'];
 
  for (const collectionName of collections) {
    await dropCollection(db, collectionName);
