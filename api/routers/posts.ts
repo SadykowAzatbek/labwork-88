@@ -18,6 +18,7 @@ postsRouter.get('/', async (_req, res, next) => {
 postsRouter.post('/', imageUpload.single('image'), async (req, res, next) => {
   try {
     const postData: PostTypes = {
+      user: req.body.user,
       title: req.body.title,
       description: req.body.description,
       image: req.file ? req.file.filename : null,
