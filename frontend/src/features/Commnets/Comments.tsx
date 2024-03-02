@@ -54,12 +54,25 @@ const Comments = () => {
     border: '1px solid #000'
   });
 
+  const fetchUrl = async () => {
+    if (params.id) {
+      await dispatch(getComments(params.id));
+    }
+  };
+
   const formSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (params.id && user) {
       await dispatch(sendComment({token: user.token, post: params.id, textComment: state.textComment}));
     }
+
+    setState((prevState) => ({
+      ...prevState,
+      textComment: '',
+    }));
+
+    void fetchUrl();
   };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +89,7 @@ const Comments = () => {
     <>
       {post && (
         <Grid item xs={12}>
-          <Card sx={{ width: 800, ml: 'auto', mr: 'auto' }}>
+          <Card sx={{ width: 800, ml: 'auto', mr: 'auto', mb: '20px' }}>
             <CardContent sx={{display: 'flex', gap: 3}}>
               {post.image !== null ? <ImageCardMedia image={'http://localhost:8000' + '/' + post.image}/> : <ImageCardMedia image={textImage} />}
               <Typography component="div" sx={{display: 'flex', flexDirection: 'column'}}>
@@ -98,20 +111,7 @@ const Comments = () => {
         </Grid>)
       }
 
-      <Grid container sx={{mt: '20px'}}>
-        {!isLoading ? comments.map((elem) => (
-          <Grid item xs={12} sx={{border: "1px solid #000", m: '10px'}} key={elem._id}>
-            <Typography variant="h5">
-              {elem.user.username}
-            </Typography>
-            <Typography component="div">
-              {elem.textComment}
-            </Typography>
-          </Grid>
-        )) : <CircularProgress />}
-      </Grid>
-
-      <Grid sx={{display: 'flex', gap: 2, position: 'sticky', mt: '200px'}}>
+      <Grid sx={{display: 'flex', gap: 2}}>
         {user && (
           <Box component="form" onSubmit={formSubmit}>
             <TextField
@@ -123,6 +123,19 @@ const Comments = () => {
             <Button type="submit">Send</Button>
           </Box>
         )}
+      </Grid>
+
+      <Grid container sx={{mt: '20px'}}>
+        {!isLoading ? comments.map((elem) => (
+          <Grid item xs={12} sx={{border: "1px solid #000", m: '10px', p: '5px'}} key={elem._id}>
+            <Typography variant="h5">
+              {elem.user.username}
+            </Typography>
+            <Typography component="div">
+              {elem.textComment}
+            </Typography>
+          </Grid>
+        )) : <CircularProgress />}
       </Grid>
     </>
   );
