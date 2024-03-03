@@ -232,6 +232,8 @@ const run = async () => {
      textComment: 'This tea is really sweet'
    }
  );
+
+  await db.close();
 };
 
 
